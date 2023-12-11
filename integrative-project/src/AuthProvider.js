@@ -12,10 +12,10 @@ const AuthProvider = ({ children }) => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const login = () => {
+  const login = (token) => {
     // Your login logic here...
     setIsLoggedIn(true);
-    localStorage.setItem('token', 'yourAuthToken');
+    localStorage.setItem('token', token);
   };
 
   const logout = () => {

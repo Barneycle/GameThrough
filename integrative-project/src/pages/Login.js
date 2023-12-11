@@ -37,8 +37,7 @@ export default function Login() {
           password,
         });
   
-        const token = response.data.token;
-  
+        login(response.data.token);
         navigate('/');
 
       } catch (error) {

@@ -59,12 +59,8 @@ import Gowr16 from './pages/Gowr16';
 import Gowr17 from './pages/Gowr17';
 import Sidebar2 from './pages/Sidebar2';
 import ProtectedRoute from './ProtectedRoute';
-import { useAuth } from './AuthProvider';
 
 export default function App() {
-
-  const { isLoggedIn } = useAuth();
-
   return (
 
     <>
@@ -81,7 +77,7 @@ export default function App() {
 
         <Route path="/about" element={<div> <Navbar /> <About /> </div>} />
 
-        <Route path="/gow1" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow1 /> </div>} />} />
+        <Route path="/gow1" element={<ProtectedRoute><div> <Sidebar1 /> <Gow1 /> </div></ProtectedRoute>} />
         <Route path="/gow2" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow2 /> </div>} />} />
         <Route path="/gow3" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow3 /> </div>} />} />
         <Route path="/gow4" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow4 /> </div>} />} />

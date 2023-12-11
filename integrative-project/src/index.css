@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .inputClass {
+
+        @apply rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ;
+
+    }
+
+    .buttonClass {
+
+        @apply w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/10 hover:shadow-teal-500/40 text-white font-mono rounded-lg;
+
+    }
+
+}
+
+form {
+
+    max-height: 80vh; /* Adjust the value as needed */
+    overflow-y: auto;
+    
+  }
+
+  body {
+
+    background-color: #282c34;
+
+  }
+  

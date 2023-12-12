@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { useNavigate, NavDropdown } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthProvider'; 
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(''); // Added state for user name
+  const { isLoggedIn, logout } = useAuth(); // Added useAuth hook
   const navigate = useNavigate();
 
   const handleNav = () => {
@@ -29,9 +30,10 @@ const Navbar = () => {
     navigate('/about');
   };
 
-  const handleLogout = () => {
-    // Implement your logout logic, e.g., clear session, update state, etc.
-    setIsLoggedIn(false);
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    logout();
+    navigate('/');
   };
 
   return (
@@ -46,7 +48,7 @@ const Navbar = () => {
         <Link to='/login' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Log In </Link>
         <Link to='/registration' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Sign Up </Link>
         <Link to='/about' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> About Us </Link>
-
+        {isLoggedIn && (<Link onClick={handleLogout} className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Logout </Link>)}
       </ul>
 
       <div onClick={handleNav} className='block md:hidden'>

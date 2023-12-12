@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../AuthProvider';
 
 export default function Sidebar1() {
+  
   const {logout} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,7 +59,7 @@ export default function Sidebar1() {
 
   return (
 
-    <div className='hidden md:block top-0 left-0 fixed bg-gray-800 w-[12vw] h-screen p-10 md:text-2xl sm:text-lg'>
+    <div className='hidden md:block top-0 left-0 fixed bg-gray-800 w-[12vw] h-screen p-10 md:text-2xl sm:text-lg overflow-y-auto'>
 
         <h2 className='text-2xl text-white font-mono font-bold pb-10'>God of War (2018) Guide</h2>
 

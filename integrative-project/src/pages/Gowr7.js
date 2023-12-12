@@ -1,6 +1,7 @@
 import React , { useEffect } from 'react'
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const GOWR7 = () => {
 
@@ -26,7 +27,7 @@ const GOWR7 = () => {
   
     return (
   
-        <div className='mx-auto h-screen max-w-[1240px]'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='mx-auto h-screen max-w-[1240px]'>
   
         <h1 className='text-5xl text-white font-mono p-10 text-center'>The Runaway</h1>
   
@@ -143,7 +144,7 @@ const GOWR7 = () => {
 
 </div>
 
-</div>
+</motion.div>
 )
 }
 

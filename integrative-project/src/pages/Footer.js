@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaGithubSquare } from 'react-icons'
 
 const Footer = () => {
 

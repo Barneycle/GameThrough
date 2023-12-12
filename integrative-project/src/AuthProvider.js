@@ -54,6 +54,7 @@ const useAuth = () => {
   }
 
   return context;
+  
 };
 
 export { AuthProvider, AuthContext, useAuth };

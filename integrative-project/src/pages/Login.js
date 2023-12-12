@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthProvider';
+import { motion } from 'framer-motion'
 
 export default function Login() {
 
@@ -74,7 +75,7 @@ export default function Login() {
   
   return (
 
-    <div className="min-h-screen w-full h-full flex flex-col justify-center">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen w-full h-full flex flex-col justify-center">
 
       <form className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg shadow-lg shadow-gray-900" onSubmit={handleLogin}>
 
@@ -114,7 +115,7 @@ export default function Login() {
 
       </form>
 
-    </div>
+    </motion.div>
 
   );
 

@@ -1,30 +1,36 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../AuthProvider';
 
 export default function Sidebar2() {
 
+  const {logout} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleGuideClick = async (route) => {
+
+    console.log('Before Logout - User Token:', localStorage.getItem('token'));
+
     if (route === '/logout') {
-      // Perform logout logic here
+
       try {
-        // Assuming you have stored a user token in localStorage
-        localStorage.removeItem('userToken');
-  
-        // Additional logout logic (e.g., clearing user data, etc.)
-  
-        // Redirect to the home page after logout
+        console.log('Attempting logout...');
+        logout();
+        console.log('Logout successful!');
         navigate('/');
+
       } catch (error) {
-        console.error('Error during logout:', error);
-        // Handle any error that might occur during logout
+
+        console.error('Error during logout:', error.message);
+
       }
     } else {
-      // For other routes, navigate to the selected route
+
       navigate(route);
+
     }
+
   };
 
     const guides = [
@@ -47,12 +53,13 @@ export default function Sidebar2() {
         { route: '/gowr16', label: 'The Summoning' },
         { route: '/gowr17', label: 'The Realms at War' },
         { route: '/', label: 'Home' },
+        { route: '/logout', label: 'Log Out' },
         
     ];
 
   return (
 
-    <div className='hidden md:block top-0 left-0 fixed bg-gray-800 w-[12vw] h-screen p-10 md:text-2xl sm:text-lg'>
+    <div className='hidden md:block top-0 left-0 fixed bg-gray-800 w-[12vw] h-screen p-10 md:text-2xl sm:text-lg overflow-y-auto'>
 
         <h2 className='text-2xl text-white font-mono font-bold pb-10'>God of War: Ragnarok</h2>
 

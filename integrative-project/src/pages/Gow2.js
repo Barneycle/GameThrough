@@ -1,6 +1,7 @@
 import React , { useEffect } from 'react'
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const GOW2 = () => {
 
@@ -26,7 +27,7 @@ const GOW2 = () => {
 
   return (
 
-    <div className='mx-auto h-screen max-w-[1240px]'>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}s className='mx-auto h-screen max-w-[1240px]'>
 
     <h1 className='text-5xl text-white font-mono p-10 text-center'>Path to the Mountain</h1>
 
@@ -445,7 +446,7 @@ const GOW2 = () => {
 
     </div>
 
-    </div>
+    </motion.div>
 
   )
 }

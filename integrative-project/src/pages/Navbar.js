@@ -6,8 +6,7 @@ import { useAuth } from '../AuthProvider';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [userName, setUserName] = useState(''); // Added state for user name
-  const { isLoggedIn, logout } = useAuth(); // Added useAuth hook
+  const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleNav = () => {
@@ -37,18 +36,32 @@ const Navbar = () => {
   };
 
   return (
-    
-    <div className='flex justify-between items-center h-24 mx-auto px-8 text-white bg-gray-800'>
+
+    <div className='flex justify-between items-center h-24 mx-auto px-8 text-white bg-gray-800 '>
 
       <Link to='/' className='w-full text-3xl font-mono text-[#00df9a]'> GameThrough </Link>
 
       <ul className='hidden md:flex w-full justify-end'>
 
         <Link to='/' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Home </Link>
-        <Link to='/login' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Log In </Link>
-        <Link to='/registration' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Sign Up </Link>
+
+        {!isLoggedIn && (<>
+          
+          <Link to='/login' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Log In </Link>
+          <Link to='/registration' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Sign Up </Link>
+          
+          </>
+
+        )}
+
         <Link to='/about' className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> About Us </Link>
-        {isLoggedIn && (<Link onClick={handleLogout} className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Logout </Link>)}
+        
+        {isLoggedIn && (
+          
+          <Link onClick={handleLogout} className='px-5 hover:bg-gray-700 hover:p-5 rounded-lg flex items-center'> Logout </Link>
+        
+        )}
+
       </ul>
 
       <div onClick={handleNav} className='block md:hidden'>
@@ -57,18 +70,32 @@ const Navbar = () => {
 
       </div>
 
-      <div
+      <div className={nav ? 'fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-gray-800 ease-in-out duration-500' : 'fixed left-[-100%]'}>
 
-        className={nav ? 'fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-gray-800 ease-in-out duration-500' : 'fixed left-[-100%]'}>
-
-        <Link className='w-full text-3xl font-mono text-[#00df9a]'> GameThrough </Link>
+        <Link to='/' className='w-full text-3xl font-mono text-[#00df9a]'> GameThrough </Link>
 
         <ul className='uppercase p-4'>
 
-          <li onClick={handleHome} className='nav-item cursor-pointer p-4 border-b border-gray-600'> Home </li>
-          <li onClick={handleLogin} className='nav-item cursor-pointer p-4 border-b border-gray-600'> Log In </li>
-          <li onClick={handleSign} className='nav-item cursor-pointer p-4 border-b border-gray-600'> Sign Up </li>
-          <li onClick={handleAbout} className='nav-item cursor-pointer p-4'> About Us </li>
+          <li onClick={handleHome} className='nav-item cursor-pointer p-4 border-b border-gray-600 hover:bg-gray-700'> Home </li>
+
+          {!isLoggedIn && (
+
+            <>
+
+              <li onClick={handleLogin} className='nav-item cursor-pointer p-4 border-b border-gray-600 hover:bg-gray-700'> Log In </li>
+              <li onClick={handleSign} className='nav-item cursor-pointer p-4 border-b border-gray-600 hover:bg-gray-700'> Sign Up </li>
+            
+            </>
+
+          )}
+
+          <li onClick={handleAbout} className={`nav-item cursor-pointer p-4 ${isLoggedIn ? 'border-b border-gray-600' : 'hidden:border-b'} hover:bg-gray-700`}> About Us </li>
+          
+          {isLoggedIn && (
+
+            <li onClick={handleLogout} className='nav-item cursor-pointer p-4 hover:bg-gray-700'> Logout </li>
+
+          )}
 
         </ul>
 

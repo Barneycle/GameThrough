@@ -1,14 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { motion } from 'framer-motion'
 
 export default function RegistrationForm() {
 
   const history = useNavigate();
 
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
 
@@ -87,7 +86,7 @@ export default function RegistrationForm() {
   
   return (
     
-    <div className="min-h-screen w-full h-full flex flex-col justify-center">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen w-full h-full flex flex-col justify-center">
 
       <section>
 
@@ -185,7 +184,7 @@ export default function RegistrationForm() {
       </section>
       
 
-    </div>
+    </motion.div>
 
   );
 

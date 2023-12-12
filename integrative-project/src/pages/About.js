@@ -3,12 +3,13 @@ import alvin from '../assets/alvin.jpg'
 import mac from '../assets/mac.jpg'
 import irish from '../assets/irish.jpg'
 import alec from '../assets/alec.jpg'
+import { motion } from 'framer-motion'
 
 const About = () => {
 
     return (
 
-        <div className='w-full h-screen py-[10rem] px-4 bg-[#36454F]'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='w-full h-screen py-[10rem] px-4 bg-[#36454F]'>
             
         <div className='max-w-[2480px] mx-auto grid md:grid-cols-4 gap-8'>
     
@@ -46,7 +47,7 @@ const About = () => {
     
         </div>
     
-        </div>
+        </motion.div>
       )
     
 }

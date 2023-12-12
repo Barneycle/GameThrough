@@ -1,6 +1,7 @@
 import React from 'react'
 import Typed from 'react-typed'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const Hero = () => {
 
@@ -13,8 +14,8 @@ const Hero = () => {
 };
 
   return (
-
-    <div className='text-white'>
+ 
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='text-white'>
 
         <div className='max-w-[2480px] mt-[-100px] w-full h-screen mx-auto text-center flex flex-col justify-center '>
 
@@ -32,7 +33,7 @@ const Hero = () => {
 
         </div>
 
-    </div>
+    </motion.div>
 
   )
 

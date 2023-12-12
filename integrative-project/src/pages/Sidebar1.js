@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import Logout from './Logout';
+import { useAuth } from '../AuthProvider';
 
 export default function Sidebar1() {
-
+  const {logout} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,7 +15,7 @@ export default function Sidebar1() {
 
       try {
         console.log('Attempting logout...');
-        await Logout();
+        logout();
         console.log('Logout successful!');
         navigate('/');
 

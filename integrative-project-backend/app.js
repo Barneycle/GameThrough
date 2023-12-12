@@ -18,6 +18,9 @@ const PORT = 3000;
 app.use(express.json());
 app.use(cors());
 
+const mongoURI = 'mongodb://localhost:27017/IntegrativeProject';
+const jwtSecretKey = 'your-secret-key';
+
 app.post('/api/register', async (req, res) => {
 
   const {
@@ -116,6 +119,21 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.post('/api/logout', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (user) {
+      user.lastLogout = new Date();
+      await user.save();
+    }
+    // Clear the token on the client side
+    console.log('Sending response:', { message: 'Logout successful' });
+    res.json({ message: 'Logout successful' });
+  } catch (error) {
+    console.error('Logout failed:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 app.use('/api/protected-route', verifyToken);
 
@@ -142,7 +160,7 @@ function verifyToken(req, res, next) {
     return res.status(403).json({ message: 'No token provided' });
   }
 
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+  jwt.verify(token, jwtSecretKey, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'Failed to authenticate token' });
     }

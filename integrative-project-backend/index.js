@@ -70,4 +70,23 @@ router.post('/login', async (req, res) => {
   
 });
 
+router.post('/api/logout', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+
+    if (user) {
+      user.lastLogout = new Date();
+      await user.save();
+    }
+
+    // Clear the token on the client side
+    console.log('Sending response:', { message: 'Logout successful' });
+    res.json({ message: 'Logout successful' });
+  } catch (error) {
+    console.error('Logout failed:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;

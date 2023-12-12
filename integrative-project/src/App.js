@@ -1,7 +1,6 @@
-import React , { useState, useEffect, useContext, createContext } from 'react';
+import React from 'react';
 import { Routes, Route , useNavigate } from 'react-router-dom';
 import RegistrationForm from './pages/RegistrationForm';
-import Logout from './pages/Logout';
 import Login from './pages/Login';
 import Navbar from './pages/Navbar';
 import Hero from './pages/Hero';
@@ -59,12 +58,8 @@ import Gowr16 from './pages/Gowr16';
 import Gowr17 from './pages/Gowr17';
 import Sidebar2 from './pages/Sidebar2';
 import ProtectedRoute from './ProtectedRoute';
-import { useAuth } from './AuthProvider';
 
 export default function App() {
-
-  const { isLoggedIn } = useAuth();
-
   return (
 
     <>
@@ -77,61 +72,57 @@ export default function App() {
 
         <Route path="/login" element={<div> <Navbar /> <Login /> </div>} />
 
-        <Route path="/logout" element={<Logout />} />
-
         <Route path="/about" element={<div> <Navbar /> <About /> </div>} />
 
-        <Route path="/gow1" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow1 /> </div>} />} />
-        <Route path="/gow2" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow2 /> </div>} />} />
-        <Route path="/gow3" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow3 /> </div>} />} />
-        <Route path="/gow4" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow4 /> </div>} />} />
-        <Route path="/gow5" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow5 /> </div>} />} />
-        <Route path="/gow6" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow6 /> </div>} />} />
-        <Route path="/gow7" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow7 /> </div>} />} />
-        <Route path="/gow8" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow8 /> </div>} />} />
-        <Route path="/gow9" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow9 /> </div>} />} />
-        <Route path="/gow10" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow10 /> </div>} />} />
-        <Route path="/gow11" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow11 /> </div>} />} />
-        <Route path="/gow12" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow12 /> </div>} />} />
-        <Route path="/gow13" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow13 /> </div>} />} />
-        <Route path="/gow14" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow14 /> </div>} />} />
-        <Route path="/gow15" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow15 /> </div>} />} />
-        <Route path="/gow16" element={<ProtectedRoute component={<div> <Sidebar1 /> <Gow16 /> </div>} />} />
+        <Route path="/gow1" element={<ProtectedRoute><div> <Sidebar1 /> <Gow1 /> </div></ProtectedRoute>} />
+        <Route path="/gow2" element={<ProtectedRoute><div> <Sidebar1 /> <Gow2 /> </div></ProtectedRoute>} />
+        <Route path="/gow3" element={<ProtectedRoute><div> <Sidebar1 /> <Gow3 /> </div></ProtectedRoute>} />
+        <Route path="/gow4" element={<ProtectedRoute><div> <Sidebar1 /> <Gow4 /> </div></ProtectedRoute>} />
+        <Route path="/gow5" element={<ProtectedRoute><div> <Sidebar1 /> <Gow5 /> </div></ProtectedRoute>} />
+        <Route path="/gow6" element={<ProtectedRoute><div> <Sidebar1 /> <Gow6 /> </div></ProtectedRoute>} />
+        <Route path="/gow7" element={<ProtectedRoute><div> <Sidebar1 /> <Gow7 /> </div></ProtectedRoute>} />
+        <Route path="/gow8" element={<ProtectedRoute><div> <Sidebar1 /> <Gow8 /> </div></ProtectedRoute>} />
+        <Route path="/gow9" element={<ProtectedRoute><div> <Sidebar1 /> <Gow9 /> </div></ProtectedRoute>} />
+        <Route path="/gow10" element={<ProtectedRoute><div> <Sidebar1 /> <Gow10 /> </div></ProtectedRoute>} />
+        <Route path="/gow11" element={<ProtectedRoute><div> <Sidebar1 /> <Gow11 /> </div></ProtectedRoute>} />
+        <Route path="/gow12" element={<ProtectedRoute><div> <Sidebar1 /> <Gow12 /> </div></ProtectedRoute>} />
+        <Route path="/gow13" element={<ProtectedRoute><div> <Sidebar1 /> <Gow13 /> </div></ProtectedRoute>} />
+        <Route path="/gow14" element={<ProtectedRoute><div> <Sidebar1 /> <Gow14 /> </div></ProtectedRoute>} />
+        <Route path="/gow15" element={<ProtectedRoute><div> <Sidebar1 /> <Gow15 /> </div></ProtectedRoute>} />
+        <Route path="/gow16" element={<ProtectedRoute><div> <Sidebar1 /> <Gow16 /> </div></ProtectedRoute>} />
 
-        <Route path="/gowr1" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr1 /> </div>} />} />
-        <Route path="/gowr2" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr2 /> </div>} />} />
-        <Route path="/gowr3" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR3 /> </div>} />} />
-        <Route path="/gowr4" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR4 /> </div>} />} />
-        <Route path="/gowr5" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr5 /> </div>} />} />
-        <Route path="/gowr6" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr6 /> </div>} />} />
-        <Route path="/gowr7" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR7 /> </div>} />} />
-        <Route path="/gowr8" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR8 /> </div>} />} />
-        <Route path="/gowr9" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR9 /> </div>} />} />
-        <Route path="/gowr10" element={<ProtectedRoute component={<div> <Sidebar2 /> <GOWR10 /> </div>} />} />
-        <Route path="/gowr11" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr11 /> </div>} />} />
-        <Route path="/gowr12" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr12 /> </div>} />} />
-        <Route path="/gowr13" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr13 /> </div>} />} />
-        <Route path="/gowr14" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr14 /> </div>} />} />
-        <Route path="/gowr15" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr15 /> </div>} />} />
-        <Route path="/gowr16" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr16 /> </div>} />} />
-        <Route path="/gowr17" element={<ProtectedRoute component={<div> <Sidebar2 /> <Gowr17 /> </div>} />} />
+        <Route path="/gowr1" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr1 /> </div></ProtectedRoute>} />
+        <Route path="/gowr2" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr2 /> </div></ProtectedRoute>} />
+        <Route path="/gowr3" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR3 /> </div></ProtectedRoute>} />
+        <Route path="/gowr4" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR4 /> </div></ProtectedRoute>} />
+        <Route path="/gowr5" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr5 /> </div></ProtectedRoute>} />
+        <Route path="/gowr6" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr6 /> </div></ProtectedRoute>} />
+        <Route path="/gowr7" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR7 /> </div></ProtectedRoute>} />
+        <Route path="/gowr8" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR8 /> </div></ProtectedRoute>} />
+        <Route path="/gowr9" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR9 /> </div></ProtectedRoute>} />
+        <Route path="/gowr10" element={<ProtectedRoute><div> <Sidebar2 /> <GOWR10 /> </div></ProtectedRoute>} />
+        <Route path="/gowr11" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr11 /> </div></ProtectedRoute>} />
+        <Route path="/gowr12" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr12 /> </div></ProtectedRoute>} />
+        <Route path="/gowr13" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr13 /> </div></ProtectedRoute>} />
+        <Route path="/gowr14" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr14 /> </div></ProtectedRoute>} />
+        <Route path="/gowr15" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr15 /> </div></ProtectedRoute>} />
+        <Route path="/gowr16" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr16 /> </div></ProtectedRoute>} />
+        <Route path="/gowr17" element={<ProtectedRoute><div> <Sidebar2 /> <Gowr17 /> </div></ProtectedRoute>} />
 
-        <Route path="/botw1" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw1 /> </div>} />} />
-        <Route path="/botw2" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw2 /> </div>} />} />
-        <Route path="/botw3" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw3 /> </div>} />} />
-        <Route path="/botw4" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw4 /> </div>} />} />
-        <Route path="/botw5" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw5 /> </div>} />} />
-        <Route path="/botw6" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw6 /> </div>} />} />
-        <Route path="/botw7" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw7 /> </div>} />} />
-        <Route path="/botw8" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw8 /> </div>} />} />
-        <Route path="/botw9" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw9 /> </div>} />} />
-        <Route path="/botw10" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw10 /> </div>} />} />
-        <Route path="/botw11" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw11 /> </div>} />} />
-        <Route path="/botw12" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw12 /> </div>} />} />
-        <Route path="/botw13" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw13 /> </div>} />} />
-        <Route path="/botw14" element={<ProtectedRoute component={<div> <Sidebar3 /> <Botw14 /> </div>} />} />
-
-
+        <Route path="/botw1" element={<ProtectedRoute><div> <Sidebar3 /> <Botw1 /> </div></ProtectedRoute>} />
+        <Route path="/botw2" element={<ProtectedRoute><div> <Sidebar3 /> <Botw2 /> </div></ProtectedRoute>} />
+        <Route path="/botw3" element={<ProtectedRoute><div> <Sidebar3 /> <Botw3 /> </div></ProtectedRoute>} />
+        <Route path="/botw4" element={<ProtectedRoute><div> <Sidebar3 /> <Botw4 /> </div></ProtectedRoute>} />
+        <Route path="/botw5" element={<ProtectedRoute><div> <Sidebar3 /> <Botw5 /> </div></ProtectedRoute>} />
+        <Route path="/botw6" element={<ProtectedRoute><div> <Sidebar3 /> <Botw6 /> </div></ProtectedRoute>} />
+        <Route path="/botw7" element={<ProtectedRoute><div> <Sidebar3 /> <Botw7 /> </div></ProtectedRoute>} />
+        <Route path="/botw8" element={<ProtectedRoute><div> <Sidebar3 /> <Botw8 /> </div></ProtectedRoute>} />
+        <Route path="/botw9" element={<ProtectedRoute><div> <Sidebar3 /> <Botw9 /> </div></ProtectedRoute>} />
+        <Route path="/botw10" element={<ProtectedRoute><div> <Sidebar3 /> <Botw10 /> </div></ProtectedRoute>} />
+        <Route path="/botw11" element={<ProtectedRoute><div> <Sidebar3 /> <Botw11 /> </div></ProtectedRoute>} />
+        <Route path="/botw12" element={<ProtectedRoute><div> <Sidebar3 /> <Botw12 /> </div></ProtectedRoute>} />
+        <Route path="/botw13" element={<ProtectedRoute><div> <Sidebar3 /> <Botw13 /> </div></ProtectedRoute>} />
+        <Route path="/botw14" element={<ProtectedRoute><div> <Sidebar3 /> <Botw14 /> </div></ProtectedRoute>} />
         
       </Routes>
 

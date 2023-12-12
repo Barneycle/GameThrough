@@ -8,6 +8,7 @@ export default function Login() {
   const { login } = useAuth();
 
   const navigate = useNavigate();
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
@@ -37,8 +38,7 @@ export default function Login() {
           password,
         });
   
-        const token = response.data.token;
-  
+        login(response.data.token);
         navigate('/');
 
       } catch (error) {
@@ -72,9 +72,6 @@ export default function Login() {
 
   };
   
-  
-
-
   return (
 
     <div className="min-h-screen w-full h-full flex flex-col justify-center">
@@ -96,36 +93,29 @@ export default function Login() {
         <div className="flex flex-col text-gray-400 py-2">
 
           <label>Password</label>
-          <input
-            className="inputClass"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+
+          <input className="inputClass"type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+
           {passwordError && <p className="text-red-500">{passwordError}</p>}
+
         </div>
 
         <div className="flex justify-between text-gray-400 py-2">
-          <p className="flex items-center">
-            <input className="mr-2" type="checkbox" />Remember Me
-          </p>
+
+          <p className="flex items-center"> <input className="mr-2" type="checkbox" />Remember Me </p>
+
         </div>
 
-        <button
-          type="submit"
-          onClick={handleLogin}
-          className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/10 hover:shadow-teal-500/40 text-white font-mono rounded-lg"
-        >
+        <button type="submit" onClick={handleLogin} className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/10 hover:shadow-teal-500/40 text-white font-mono rounded-lg">
           Sign In
         </button>
 
-        <p className="text-white font-mono">
-          Don't have an account?{' '}
-          <Link to="/registration" className="underline text-white font-mono">
-            Sign Up
-          </Link>
-        </p>
+        <p className="text-white font-mono"> Don't have an account?{' '} <Link to="/registration" className="underline text-white font-mono"> Sign Up </Link></p>
+
       </form>
+
     </div>
+
   );
+
 }

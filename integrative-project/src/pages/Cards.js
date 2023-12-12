@@ -1,48 +1,26 @@
-import React , { useState } from 'react'
+import React , { useState, useEffect } from 'react'
 import gow from '../assets/gow.png'
 import gow2 from '../assets/gow2.png'
 import botw from '../assets/botw.png'
 import { useNavigate } from 'react-router-dom'
 
 const Cards = () => {
-
-    const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleGuide1 = () => {
     
-    if (isLoggedIn) {
       navigate('/gow1');
-    } else {
-      
-      navigate('/login');
-    }
+    
   };
 
   const handleGuide2 = () => {
-
-    if (isLoggedIn) {
-
       navigate('/gowr1');
-
-    } else {
-
-      navigate('/login');
-    }
   };
 
   const handleGuide3 = () => {
-
-    if (isLoggedIn) {
-
       navigate('/botw1');
-
-    } else {
-
-      navigate('/login');
-      
-    }
   };
+
   return (
 
     <div className='w-full py-[10rem] px-4 bg-[#36454F]'>

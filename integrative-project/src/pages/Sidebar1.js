@@ -1,16 +1,37 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import Logout from './Logout';
 
 export default function Sidebar1() {
 
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleGuideClick = (route) => {
+  const handleGuideClick = async (route) => {
 
-        navigate(route);
+    console.log('Before Logout - User Token:', localStorage.getItem('token'));
 
-      };
+    if (route === '/logout') {
+
+      try {
+        console.log('Attempting logout...');
+        await Logout();
+        console.log('Logout successful!');
+        navigate('/');
+
+      } catch (error) {
+
+        console.error('Error during logout:', error.message);
+
+      }
+    } else {
+
+      navigate(route);
+
+    }
+
+  };
+  
 
     const guides = [
 
@@ -31,7 +52,7 @@ export default function Sidebar1() {
         { route: '/gow15', label: 'Jotunheim in Reach' },
         { route: '/gow16', label: "Mother's Ashes" },
         { route: '/', label: 'Home' },
-        { route: '/', label: 'Log Out' },
+        { route: '/logout', label: 'Log Out' },
         
     ];
 
@@ -46,9 +67,9 @@ export default function Sidebar1() {
         {guides.map((guide, index) => (
           <li
             key={index}
-            onClick={() => handleGuideClick(guide.route)}
-            className={`text-xl py-7 hover:bg-gray-700 rounded-lg font-mono nav-item cursor-pointer ${
-              location.pathname === guide.route ? 'bg-gray-700' : ''
+            onClick={() => (guide.route === '/logout' ? handleGuideClick(guide.route) : handleGuideClick(guide.route))}
+          className={`text-xl py-7 hover:bg-gray-700 rounded-lg font-mono nav-item cursor-pointer ${
+            location.pathname === guide.route ? 'bg-gray-700' : ''
             }`}
           >
             {guide.label}

@@ -3,14 +3,29 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function Sidebar2() {
 
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleGuideClick = (route) => {
-
-        navigate(route);
-
-      };
+  const handleGuideClick = async (route) => {
+    if (route === '/logout') {
+      // Perform logout logic here
+      try {
+        // Assuming you have stored a user token in localStorage
+        localStorage.removeItem('userToken');
+  
+        // Additional logout logic (e.g., clearing user data, etc.)
+  
+        // Redirect to the home page after logout
+        navigate('/');
+      } catch (error) {
+        console.error('Error during logout:', error);
+        // Handle any error that might occur during logout
+      }
+    } else {
+      // For other routes, navigate to the selected route
+      navigate(route);
+    }
+  };
 
     const guides = [
 

@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { useAuth, AuthProvider } from './AuthProvider'; // Adjust the path accordingly
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthProvider'; // Adjust the path accordingly
 
-const ProtectedRoute = ({ element, ...rest }) => {
+const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
-  // Redirect to login if the user is not authenticated
   useEffect(() => {
     if (!isLoggedIn) {
- 
-      return <Navigate to="/login" />;
+      // Redirect to the login page
+      navigate('/login', { replace: true }); // Use replace to replace the current entry in the navigation history
     }
-  }, [isLoggedIn, rest]);
+  }, [isLoggedIn, navigate]);
 
   // Render the protected content if the user is authenticated
-  return isLoggedIn ? <Route {...rest} element={element} /> : null;
+  return isLoggedIn ? children : null;
 };
 
 export default ProtectedRoute;

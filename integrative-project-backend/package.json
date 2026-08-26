@@ -2,12 +2,13 @@
   "name": "integrative-project-backend",
   "version": "1.0.0",
   "main": "app.js",
+  "type": "commonjs",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node local.js",
+    "dev": "nodemon local.js"
   },
   "author": "",
   "license": "ISC",

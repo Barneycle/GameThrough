@@ -221,4 +221,12 @@ app.put('/api/progress', verifyToken, async (req, res) => {
   }
 });
 
+app.use((error, req, res, next) => {
+  console.error('Unhandled API error:', error);
+  if (res.headersSent) {
+    return next(error);
+  }
+  res.status(500).json({ message: 'Internal Server Error' });
+});
+
 module.exports = app;

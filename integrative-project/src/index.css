@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-mint: #00df9a;
+  --color-ink: #14171c;
+  --color-ebony: #282c34;
+  --color-slate: #36454f;
+  --color-mist: #9aa3ad;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+    font-feature-settings: "ss01" on, "cv11" on;
+    letter-spacing: 0.01em;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(0 223 154 / 0.12), transparent),
+      radial-gradient(ellipse 40% 30% at 100% 0%, rgb(54 69 79 / 0.45), transparent);
+    min-height: 100%;
+  }
+
+  ::selection {
+    background: #00df9a;
+    color: #14171c;
+  }
+}
+
+@layer components {
+  .field {
+    @apply mt-2 w-full rounded-xl border border-white/10 bg-ink px-3.5 py-2.5 text-white outline-none transition placeholder:text-white/30 focus:border-mint/70 focus:ring-2 focus:ring-mint/20;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-ink;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.38) 50%,
+      transparent 65%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.55s ease;
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    @apply bg-mint/90;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 28px rgb(0 223 154 / 0.28);
+  }
+
+  .btn-primary:hover::after {
+    transform: translateX(130%);
+  }
+
+  .btn-primary:disabled {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    @apply border-mint/40 bg-white/10;
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .btn-warning {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-ink;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .btn-warning:hover {
+    @apply bg-amber-300;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 28px rgb(251 191 36 / 0.28);
+  }
+
+  .btn-warning:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-white/10 bg-ebony/80 shadow-[0_20px_60px_rgb(0_0_0_/_0.35)] backdrop-blur-sm;
+  }
+
+  .card-motion {
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .card-motion:hover {
+    border-color: rgb(0 223 154 / 0.35);
+    box-shadow:
+      0 24px 50px rgb(0 0 0 / 0.45),
+      0 0 36px rgb(0 223 154 / 0.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary,
+    .btn-primary::after,
+    .btn-secondary,
+    .btn-warning,
+    .card-motion {
+      transition: none;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-warning:hover,
+    .card-motion:hover {
+      transform: none;
+    }
+  }
+
+  .kicker {
+    @apply font-display text-[11px] font-semibold tracking-[0.2em] text-mint uppercase;
+  }
+}

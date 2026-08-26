@@ -1,0 +1,25 @@
+{
+  "name": "integrative-project-backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jose": "^6.2.9",
+    "mongoose": "^8.24.3",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [],
+  "description": "GameThrough Express API"
+}

@@ -7,13 +7,16 @@ const cors = require('cors');
 const User = require('./models/user');
 const Progress = require('./models/progress');
 const bcrypt = require('bcryptjs');
-const { SignJWT, jwtVerify } = require('jose');
+const jwt = require('jsonwebtoken');
 
-dns.setDefaultResultOrder('ipv4first');
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch {
+  // Some runtimes do not allow this; Atlas still works without it.
+}
 
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/IntegrativeProject';
 const jwtSecretKey = process.env.JWT_SECRET || 'your-secret-key';
-const jwtSecret = new TextEncoder().encode(jwtSecretKey);
 
 const frontendOrigins = (process.env.FRONTEND_ORIGIN || '')
   .split(',')
@@ -122,13 +125,13 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const token = await new SignJWT({
-      userId: user._id.toString(),
-      username: user.username,
-    })
-      .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt()
-      .sign(jwtSecret);
+    const token = jwt.sign(
+      {
+        userId: user._id.toString(),
+        username: user.username,
+      },
+      jwtSecretKey,
+    );
 
     res.json({ token });
   } catch (error) {
@@ -137,7 +140,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-async function verifyToken(req, res, next) {
+function verifyToken(req, res, next) {
   const header = req.headers.authorization;
 
   if (!header || !header.startsWith('Bearer ')) {
@@ -147,8 +150,8 @@ async function verifyToken(req, res, next) {
   const token = header.split(' ')[1];
 
   try {
-    const { payload } = await jwtVerify(token, jwtSecret);
-    req.userId = payload.userId;
+    const decoded = jwt.verify(token, jwtSecretKey);
+    req.userId = decoded.userId;
     next();
   } catch {
     return res.status(401).json({ message: 'Failed to authenticate token' });

@@ -14,7 +14,6 @@ dns.setDefaultResultOrder('ipv4first');
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/IntegrativeProject';
 const jwtSecretKey = process.env.JWT_SECRET || 'your-secret-key';
 const jwtSecret = new TextEncoder().encode(jwtSecretKey);
-const PORT = process.env.PORT || 3000;
 
 const frontendOrigins = (process.env.FRONTEND_ORIGIN || '')
   .split(',')
@@ -57,6 +56,10 @@ app.use(
   }),
 );
 
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true });
+});
+
 app.use(async (req, res, next) => {
   try {
     await connectDb();
@@ -68,10 +71,6 @@ app.use(async (req, res, next) => {
         'Database unavailable. In Atlas: Network Access must allow 0.0.0.0/0, and the cluster must be running.',
     });
   }
-});
-
-app.get('/api/health', (req, res) => {
-  res.json({ ok: true });
 });
 
 app.post('/api/register', async (req, res) => {
@@ -223,20 +222,3 @@ app.put('/api/progress', verifyToken, async (req, res) => {
 });
 
 module.exports = app;
-
-if (!process.env.VERCEL) {
-  connectDb()
-    .then(() => {
-      console.log('Connected to MongoDB');
-    })
-    .catch((error) => {
-      console.error('MongoDB connection error:', error.message);
-      console.error(
-        'Atlas refused the TLS handshake. In Atlas: Network Access → add this computer’s IP (or 0.0.0.0/0), and make sure the cluster is running (not paused).',
-      );
-    });
-
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}
